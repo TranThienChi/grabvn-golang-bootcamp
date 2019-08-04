@@ -65,12 +65,14 @@ func calc(operator string, arithmetric Arithmetric) (float64, error) {
 // checkFormat check formula format
 func checkFormat(formula *Formula, arr []string) {
 	if len(arr) == 3 {
+		// check valid number
 		if first, err := strconv.ParseFloat(arr[0], 64); err == nil {
 			formula.firstNumber = first
 		} else {
 			panic(err)
 		}
 
+		// check valid operator
 		switch arr[1] {
 		case "+", "-", "*", "/":
 			formula.operator = arr[1]
@@ -78,6 +80,7 @@ func checkFormat(formula *Formula, arr []string) {
 			panic(errors.New("Invalid operator"))
 		}
 
+		// check valid number
 		if second, err := strconv.ParseFloat(arr[2], 64); err == nil {
 			formula.secondNumber = second
 		} else {
