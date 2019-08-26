@@ -1,0 +1,58 @@
+syntax = "proto3";
+
+package passengerFeedback;
+
+// PassengerFeedbackService simple passenger feedback service
+service PassengerFeedbackService {
+    rpc AddPassengerFeedback (AddPassengerFeedbackRequest) returns (AddPassengerFeedbackResponse) {}
+    rpc GetByPassengerId (GetByPassengerIdRequest) returns (GetByPassengerIdResponse) {}
+    rpc GetByBookingCode (GetByBookingCodeRequest) returns (GetByBookingCodeResponse) {}
+    rpc DeleteByPassengerId(DeleteByPassengerIdRequest) returns (DeleteByPassengerIdResponse) {}
+}
+
+// PassengerFeedback contains a booking code, a passenger id and a feedback
+message PassengerFeedback {
+    string bookingCode = 1;
+    int32 passengerID = 2;
+    string feedback = 3;
+}
+
+// AddPassengerFeedbackRequest the request passenger feedback 
+message AddPassengerFeedbackRequest {
+    PassengerFeedback passengerFeedback = 1;
+}
+  
+// AddPassengerFeedbackResponse the response passenger feedback 
+message AddPassengerFeedbackResponse {
+    PassengerFeedback passengerFeedback = 1;
+}
+
+// GetByPassengerIdRequest the request passenger id 
+message GetByPassengerIdRequest {
+    int32 passengerID = 1;
+}
+
+// GetByPassengerIdResponse the response passenger id 
+message GetByPassengerIdResponse {
+    repeated PassengerFeedback passengerFeedbacks = 1;
+}
+
+// GetByBookingCodeRequest the request booking code
+message GetByBookingCodeRequest {
+    string bookingCode = 1;
+}
+
+// GetByBookingCodeResponse the response booking code
+message GetByBookingCodeResponse {
+    PassengerFeedback passengerFeedback = 1;
+}
+
+// DeleteByPassengerIdRequest the request delete feedback by passenger id
+message DeleteByPassengerIdRequest {
+    int32 passengerID = 1;
+}
+
+// DeleteByPassengerIdResponse the response delete feedback by passenger id
+message DeleteByPassengerIdResponse {
+    int32 totalDeletedFeedback = 1;
+}
